@@ -2,7 +2,7 @@ def memoized(func):
     def wrapper(self, *args):
         if not hasattr(self, '_called'):
             self._called = {}
-        self._called[func.__name__] = args[0] if args else True
+        self._called[func.__name__] = args
         return func(self, *args)
     return wrapper
 
@@ -64,10 +64,10 @@ class Validator(UserValidator):
                 return False
             
             if 'contains' in calls:
-                return self._called.get('contains') in string
+                return self._called.get('contains')[0] in string
             
             if 'min_len' in calls:
-                return len(string) >= self._called.get('min_len')
+                return len(string) >= self._called.get('min_len')[0]
             
             if 'test' in calls:
                 func_name, pattern = self._called.get('test')
