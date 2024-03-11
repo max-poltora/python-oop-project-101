@@ -114,12 +114,12 @@ class Validator(UserValidator):
                 return False
             
             if 'positive' in calls:
-                return number>=0
+                return number>0
             
             if 'range' in calls:
                 start, end = self._called.get('range')
                 if 'positive' in calls:
-                    return number>=0 and number in range(start, end+1)
+                    return number>0 and number in range(start, end+1)
                 else:
                     return number in range(start, end+1)
             
