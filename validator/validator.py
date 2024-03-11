@@ -2,7 +2,7 @@ def memoized(func):
     def wrapper(self, *args):
         if not hasattr(self, '_called'):
             self._called = {}
-        self._called[func.__name__] = args
+        self._called[func.__name__] = args[0] if args else True
         return func(self, *args)
     return wrapper
 
