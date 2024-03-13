@@ -8,6 +8,7 @@ def memoized(func):
 
 class UserValidator:
 
+    
     VALIDATOR = {}
 
     def add_validator(self, validator_type, func_name, func):
@@ -15,6 +16,7 @@ class UserValidator:
 
 class Validator(UserValidator):
 
+    
     def string(self):
         return Validator.StringObject()
 
@@ -52,7 +54,7 @@ class Validator(UserValidator):
         def is_valid(self, string):
             try:
                 calls = self._called.keys()
-            except AttributeError: # type object 'StringObject' has no attribute '_called' - none of functions was called
+            except AttributeError:  # type object 'StringObject' has no attribute '_called' - none of functions was called
                 if string is None:
                     return True
                 else:
@@ -98,7 +100,7 @@ class Validator(UserValidator):
         def is_valid(self, number):
             try:
                 calls = self._called.keys()
-            except AttributeError:  #type object 'NumbergObject' has no attribute '_called' - none of functions was called
+            except AttributeError:  # type object 'NumbergObject' has no attribute '_called' - none of functions was called
                 if number is None:
                     return True
                 else:
@@ -113,7 +115,7 @@ class Validator(UserValidator):
             if 'range' in calls:
                 start, end = self._called.get('range')
                 if 'positive' in calls:
-                    return number>0 and number in range(start, end + 1)
+                    return number > 0 and number in range(start, end + 1)
                 else:
                     return number in range(start, end + 1)
 
@@ -143,13 +145,13 @@ class Validator(UserValidator):
         def is_valid(self, lst):
             try:
                 calls = self._called.keys()
-            except AttributeError: # type object 'ListObject' has no attribute '_called' - none of functions was called
-                if lst == None:
+            except AttributeError:  # type object 'ListObject' has no attribute '_called' - none of functions was called
+                if lst is None:
                     return True
                 else:
                     return isinstance(lst, self.TYPE)
 
-            if 'required' in calls and lst==None:
+            if 'required' in calls and lst is None:
                 return False
 
             if 'sizeof' in calls:
