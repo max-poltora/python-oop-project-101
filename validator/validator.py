@@ -113,15 +113,15 @@ class Validator(UserValidator):
             if 'required' in calls and number==None:
                 return False
             
-            if 'positive' in calls:
-                return number>0
-            
             if 'range' in calls:
                 start, end = self._called.get('range')
                 if 'positive' in calls:
                     return number>0 and number in range(start, end+1)
                 else:
                     return number in range(start, end+1)
+            
+            if 'positive' in calls:
+                return number>0
             
             if 'test' in calls:
                 func_name, threshold = self._called.get('test')
