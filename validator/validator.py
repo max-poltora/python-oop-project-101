@@ -6,17 +6,17 @@ def memoized(func):
         return func(self, *args)
     return wrapper
 
+
 class UserValidator:
 
-    
     VALIDATOR = {}
 
     def add_validator(self, validator_type, func_name, func):
         self.VALIDATOR[func_name] = func
 
+
 class Validator(UserValidator):
 
-    
     def string(self):
         return Validator.StringObject()
 
